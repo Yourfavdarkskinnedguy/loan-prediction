@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Prediction Web App</title>
+    <style>
+        /* Reset some default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            color: #555;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        .result.success {
+            color: #4CAF50;
+        }
+
+        .result.error {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <h1>Loan Prediction</h1>
+
+    <form action="{{ url_for('predict')}}" method="post">
+        <label for="person_age">Age:</label>
+        <input type="text" name="person_age" placeholder="Enter age" required><br><br>
+
+        <label for="person_gender">Gender:</label>
+        <select name="person_gender" id="person_gender" required>
+            <option value="0">Female</option>
+            <option value="1">Male</option>
+        </select><br><br>
+
+        <label for="person_education">Education Level:</label>
+        <select name="person_education" id="person_education" required>
+            <option value="4">Master</option>
+            <option value="3">High School</option>
+            <option value="1">Bachelor</option>
+            <option value="0">Associate</option>
+            <option value="2">Doctorate</option>
+        </select><br><br>
+
+        <label for="person_income">Income:</label>    
+        <input type="text" name="person_income" placeholder="Enter income" required><br><br>
+
+        <label for="person_emp_exp">Employment experience (years):</label> 
+        <input type="text" name="person_emp_exp" placeholder="Enter employment experience (years)" required><br><br>
+
+        <label for="person_home_ownership">Home Ownership:</label>
+        <select name="person_home_ownership" id="person_home_ownership" required>
+            <option value="2">Rent</option>
+            <option value="3">Own</option>
+            <option value="0">Mortgage</option>
+            <option value="1">Other</option>
+        </select><br><br>
+
+        <label for="loan_amnt">Loan amount:</label> 
+        <input type="text" name="loan_amnt" placeholder="Enter loan amount" required><br><br>
+
+        <label for="loan_intent">Loan Intent:</label>
+        <select name="loan_intent" id="loan_intent" required>
+            <option value="4">Personal</option>
+            <option value="1">Education</option>
+            <option value="3">Medical</option>
+            <option value="5">Venture</option>
+            <option value="2">Home Improvement</option>
+            <option value="0">Debt Consolidation</option>
+        </select><br><br>
+
+        <label for="loan_int_rate">Loan interest rate:</label> 
+        <input type="text" name="loan_int_rate" placeholder="Enter loan interest rate" required><br><br>
+
+        <label for="loan_percent_income">Loan percentage of income:</label> 
+        <input type="text" name="loan_percent_income" placeholder="Enter loan percentage of income" required><br><br>
+
+        <label for="cb_person_cred_hist_length">Credit history length (years):</label> 
+        <input type="text" name="cb_person_cred_hist_length" placeholder="Enter credit history length (years)" required><br><br>
+
+        <label for="credit_score">Credit score:</label> 
+        <input type="text" name="credit_score" placeholder="Enter credit score" required><br><br>
+
+        <label for="previous_loan_defaults_on_file">Previous Loan Defaults:</label>
+        <select name="previous_loan_defaults_on_file" id="previous_loan_defaults_on_file" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br><br>
+
+        <button type="submit">Predict</button>    
+    </form>
+
+    <br>
+    <div class="result">{{ result }}</div>
+</body>
+</html>
