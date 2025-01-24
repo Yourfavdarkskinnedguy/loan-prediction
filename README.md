@@ -59,4 +59,8 @@ pip install -r requirements.txt
 ## Run the flask application 
 python app.py
 
+## link to the webapp
+
+[Loan Predictor] (https://loan-prediction-4z1y.onrender.com/)
+
 
